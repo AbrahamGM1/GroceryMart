@@ -18,7 +18,7 @@ public class ConexionBD implements IConexionBD{
 
     final String cadenaConexion = "jdbc:mysql://localhost/grocery_mart";
     final String usuario="root";
-    final String contrasenia="035602";
+    final String contrasenia="1234";
 
     public ConexionBD() {
     }

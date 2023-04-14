@@ -12,20 +12,20 @@ public class ProductoInventario {
     
     private int idProductoInventario;
     private int cantidad;
-    private int idProducto;
+    private Producto producto;
 
     public ProductoInventario() {
     }
 
-    public ProductoInventario(int idProductoInventario, int cantidad, int idProducto) {
+    public ProductoInventario(int idProductoInventario, int cantidad, Producto producto) {
         this.idProductoInventario = idProductoInventario;
         this.cantidad = cantidad;
-        this.idProducto = idProducto;
+        this.producto = producto;
     }
 
-    public ProductoInventario(int cantidad, int idProducto) {
+    public ProductoInventario(int cantidad, Producto producto) {
         this.cantidad = cantidad;
-        this.idProducto = idProducto;
+        this.producto = producto;
     }
 
     public int getIdProductoInventario() {
@@ -44,12 +44,12 @@ public class ProductoInventario {
         this.cantidad = cantidad;
     }
 
-    public int getIdProducto() {
-        return idProducto;
+    public Producto getIdProducto() {
+        return producto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -57,7 +57,6 @@ public class ProductoInventario {
         int hash = 5;
         hash = 97 * hash + this.idProductoInventario;
         hash = 97 * hash + this.cantidad;
-        hash = 97 * hash + this.idProducto;
         return hash;
     }
 
@@ -79,12 +78,12 @@ public class ProductoInventario {
         if (this.cantidad != other.cantidad) {
             return false;
         }
-        return this.idProducto == other.idProducto;
+        return this.producto == other.producto;
     }
 
     @Override
     public String toString() {
-        return "ProductoInventario{" + "idProductoInventario=" + idProductoInventario + ", cantidad=" + cantidad + ", idProducto=" + idProducto + '}';
+        return "ProductoInventario{" + "idProductoInventario=" + idProductoInventario + ", cantidad=" + cantidad + ", idProducto=" + producto.toString() + '}';
     }
     
     
