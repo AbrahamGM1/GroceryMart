@@ -4,21 +4,19 @@
  */
 package Interfaces;
 
-import Entidades.Compra;
-import Entidades.DetalleCompra;
+import Entidades.Adeudo;
+import Entidades.Costo;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author rjsaa
  */
-public interface IComprasDAO {
+public interface ICostosDAO {
     
-    public boolean insertar(Compra compra);
-    
-    public boolean insertarDetalles(ArrayList<DetalleCompra> detalles);
-    
-    
-    public int consultarUltimo();
+    public boolean insertar(Costo costo,int idAdeudo);
+   
+    public List<Costo> consultarCostosAdeudo(Adeudo adeudo);
     
 }

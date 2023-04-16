@@ -6,6 +6,7 @@ package Interfaces;
 
 import Entidades.Producto;
 import Entidades.ProductoInventario;
+import java.util.List;
 
 /**
  *
@@ -15,7 +16,10 @@ public interface IInventarioDAO {
     
     public boolean insertar(ProductoInventario producto);
     
+    public List<ProductoInventario> consultarTodos();
     
+    public boolean consultarProductoInventario(String string);
     
-    
+    public boolean agregarCantidad(int cantidad,int idInventario);
+   
 }
