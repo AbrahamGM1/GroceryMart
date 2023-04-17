@@ -76,6 +76,84 @@ public class InventarioDAO implements IInventarioDAO {
         }
     }
     
+        public Producto consultarId(Integer id) {
+        List<ProductoInventario> productos = new ArrayList<>();
+
+        try {
+            Connection conexion = this.conexion.crearConexion();
+
+            Statement comandoSQL = conexion.createStatement();
+            String codigoSQL = String.format("SELECT * FROM grocery_mart.producto_inventario"
+                    + " JOIN grocery_mart.productos "
+                    + " ON grocery_mart.productos.id_productos = grocery_mart.producto_inventario.id_producto"
+                    + " WHERE id_producto = "+ id
+            );
+
+            ResultSet resultados = comandoSQL.executeQuery(codigoSQL);
+
+            while (resultados.next()) {
+                ProductoInventario producto = new ProductoInventario();
+                producto.setIdProductoInventario(resultados.getInt(1));
+                producto.setCantidad(resultados.getInt(2));
+                
+                Producto productoss = new Producto();
+                
+                productoss.setIdProducto(resultados.getInt(3));
+                productoss.setNombre(resultados.getString(5));
+                productoss.setPrecio(resultados.getFloat(6));
+                productoss.setMarca(resultados.getString(7));
+                producto.setProducto(productoss);
+                
+                productos.add(producto);
+
+            }
+            conexion.close();
+            return productos.get(0).getIdProducto();
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    
+        public List<ProductoInventario> consultarTodoProductoInventario() {
+        List<ProductoInventario> productos = new ArrayList<>();
+
+        try {
+            Connection conexion = this.conexion.crearConexion();
+
+            Statement comandoSQL = conexion.createStatement();
+            String codigoSQL = String.format("SELECT * FROM grocery_mart.producto_inventario"
+                    + " JOIN grocery_mart.productos "
+                    + " ON grocery_mart.productos.id_productos = grocery_mart.producto_inventario.id_producto");
+
+            ResultSet resultados = comandoSQL.executeQuery(codigoSQL);
+
+            while (resultados.next()) {
+                ProductoInventario producto = new ProductoInventario();
+                producto.setIdProductoInventario(resultados.getInt(1));
+                producto.setCantidad(resultados.getInt(2));
+                
+                Producto productoss = new Producto();
+                
+                productoss.setIdProducto(resultados.getInt(3));
+                productoss.setNombre(resultados.getString(5));
+                productoss.setPrecio(resultados.getFloat(6));
+                productoss.setMarca(resultados.getString(7));
+                producto.setProducto(productoss);
+                
+                productos.add(producto);
+
+            }
+            conexion.close();
+            return productos;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
     
     
     
@@ -121,7 +199,7 @@ public class InventarioDAO implements IInventarioDAO {
             Statement comandoSQL = conexion.createStatement();
             String codigoSQL = String.format("UPDATE grocery_mart.producto_inventario "
                     + "SET cantidad = cantidad + "+ cantidad
-                    + " WHERE grocery_mart.producto_inventario.id_producto_inventario = "+idInventario+" ;");
+                    + " WHERE grocery_mart.producto_inventario.id_producto = "+idInventario+" ;");
 
             int registrosAfectados = comandoSQL.executeUpdate(codigoSQL);
             conexion.close();
@@ -132,4 +210,43 @@ public class InventarioDAO implements IInventarioDAO {
     }
     
     
+            public List<ProductoInventario> ConsultaString(String string) {
+        List<ProductoInventario> productos = new ArrayList<>();
+
+        try {
+            Connection conexion = this.conexion.crearConexion();
+
+            Statement comandoSQL = conexion.createStatement();
+            String codigoSQL = String.format("SELECT * FROM grocery_mart.producto_inventario"
+                    + " JOIN grocery_mart.productos "
+                    + " ON grocery_mart.productos.id_productos = grocery_mart.producto_inventario.id_producto"
+                    + " WHERE nombre LIKE '%%" + string + "%%';"
+            );
+
+            ResultSet resultados = comandoSQL.executeQuery(codigoSQL);
+
+            while (resultados.next()) {
+                ProductoInventario producto = new ProductoInventario();
+                producto.setIdProductoInventario(resultados.getInt(1));
+                producto.setCantidad(resultados.getInt(2));
+                
+                Producto productoss = new Producto();
+                
+                productoss.setIdProducto(resultados.getInt(3));
+                productoss.setNombre(resultados.getString(5));
+                productoss.setPrecio(resultados.getFloat(6));
+                productoss.setMarca(resultados.getString(7));
+                producto.setProducto(productoss);
+                
+                productos.add(producto);
+
+            }
+            conexion.close();
+            return productos;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 }

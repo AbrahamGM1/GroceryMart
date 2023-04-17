@@ -5,9 +5,12 @@
 package guis;
 
 import Entidades.Producto;
+import Interfaces.IGestionInventario;
 import Negocio.GestionProducto;
 import java.awt.Color;
 import Interfaces.IGestionProducto;
+import Negocio.GestionInventario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +19,7 @@ import Interfaces.IGestionProducto;
 public class frmAgregarInventario extends javax.swing.JFrame {
 
     IGestionProducto control = new GestionProducto();
+    IGestionInventario controlInventario = new GestionInventario();
 
     public frmAgregarInventario() {
         initComponents();
@@ -43,8 +47,8 @@ public class frmAgregarInventario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +80,11 @@ public class frmAgregarInventario extends javax.swing.JFrame {
         });
         tablaProductos.setMinimumSize(new java.awt.Dimension(30, 60));
         tablaProductos.setSelectionBackground(new java.awt.Color(0, 0, 255));
+        tablaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaProductos);
         if (tablaProductos.getColumnModel().getColumnCount() > 0) {
             tablaProductos.getColumnModel().getColumn(0).setResizable(false);
@@ -104,6 +113,11 @@ public class frmAgregarInventario extends javax.swing.JFrame {
         });
 
         txtConsulta.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
+        txtConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConsultaActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(0, 0, 255));
@@ -123,9 +137,20 @@ public class frmAgregarInventario extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         jLabel3.setText("Cantidad:");
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNombre.setEditable(false);
+        txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCantidad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,11 +165,10 @@ public class frmAgregarInventario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jTextField2))
-                                    .addComponent(jTextField1)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txtCantidad)
+                                    .addComponent(txtNombre)
                                     .addComponent(btnAgregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +200,11 @@ public class frmAgregarInventario extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
@@ -190,12 +214,29 @@ public class frmAgregarInventario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+        //INSERTAR PRODUCTO AL INVENTARIO
+        if ("".equals(txtCantidad.getText())) {
+            JOptionPane.showMessageDialog(this, "Ingrese la cantidad a inventariar primero", "Aviso", 2);
+        }
+        else if(Integer.parseInt(txtCantidad.getText())==0){
+            JOptionPane.showMessageDialog(this, "La cantidad ingresada debe de ser mayor a 0", "Aviso", 2);            
+        }
+        else if (!("".equals(txtCantidad.getText()))) {
+            Integer id = control.getProductoSeleccionado(tablaProductos);
+            if (id != null) {
+                controlInventario.insertar(this, id, tablaProductos, Integer.parseInt(txtCantidad.getText()));
+                txtCantidad.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione un producto de la tabla", "Aviso", 2);
+            }
+        }
+
 
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        frmMenu m = new frmMenu();
+        frmGestionInventario m = new frmGestionInventario();
         m.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -205,6 +246,29 @@ public class frmAgregarInventario extends javax.swing.JFrame {
         String consulta = txtConsulta.getText();
         control.ConsultaString(tablaProductos, consulta);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConsultaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConsultaActionPerformed
+
+    private void tablaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProductosMouseClicked
+        // Mostrar nombre de producto en TextField
+        control.getProductoSeleccionadoNombre(tablaProductos,txtNombre);
+    }//GEN-LAST:event_tablaProductosMouseClicked
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+           (c == evt.VK_BACK_SPACE) ||
+           (c == evt.VK_DELETE))) {
+          getToolkit().beep();
+          evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -216,9 +280,9 @@ public class frmAgregarInventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tablaProductos;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtConsulta;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }

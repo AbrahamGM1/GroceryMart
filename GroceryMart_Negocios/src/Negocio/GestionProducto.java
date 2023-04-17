@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import Interfaces.IGestionProducto;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -83,17 +84,31 @@ public class GestionProducto implements IGestionProducto {
             return null;
         }
     }
-    
-        public Producto consultaProducto(JFrame frame, String idSeleccionado, JTable tblProductos) {
+
+    @Override
+    public String getProductoSeleccionadoNombre(JTable tblProductos, JTextField txt) {
+        int indiceFilaSeleccionada = tblProductos.getSelectedRow();
+        DefaultTableModel modelo = (DefaultTableModel) tblProductos.getModel();
+        int indiceColumnaId = 1;
+        if (indiceFilaSeleccionada != -1) {
+            String productoSeleccionado = (String) modelo.getValueAt(indiceFilaSeleccionada, indiceColumnaId);
+            txt.setText(productoSeleccionado);
+            return productoSeleccionado;
+        } else {
+            return null;
+        }
+    }
+
+    public Producto consultaProducto(JFrame frame, String idSeleccionado, JTable tblProductos) {
         //INICIALIZAR LOS ID
-        
+
         if (idSeleccionado == null) {
             JOptionPane.showMessageDialog(frame, "Debes seleccionar un producto primero", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             return null;
         } else {
             idSeleccionado = this.getProductoSeleccionado(tblProductos).toString();
             // Devolver cada parámetro dentro de su respectivo JTextField 
-            Producto producto= new Producto(Integer.parseInt(idSeleccionado));
+            Producto producto = new Producto(Integer.parseInt(idSeleccionado));
             producto = p.consultar(producto);
             return producto;
         }
@@ -125,8 +140,8 @@ public class GestionProducto implements IGestionProducto {
     @Override
     public List<Producto> ConsultaString(JTable tblProductos, String string) {
         List<Producto> listaProductos = p.ConsultaString(string);
-        
-                DefaultTableModel modeloTabla = (DefaultTableModel) tblProductos.getModel();
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblProductos.getModel();
         modeloTabla.setRowCount(0);
         listaProductos.forEach(producto -> {
 
@@ -141,7 +156,7 @@ public class GestionProducto implements IGestionProducto {
         tblProductos.getColumnModel().getColumn(0).setMaxWidth(0);
         tblProductos.getColumnModel().getColumn(0).setMinWidth(0);
         tblProductos.getColumnModel().getColumn(0).setPreferredWidth(0);
-        
+
         return listaProductos;
     }
 
@@ -153,7 +168,7 @@ public class GestionProducto implements IGestionProducto {
         } else {
             // Devolver cada parámetro dentro de su respectivo JTextField 
             idSeleccionado = this.getProductoSeleccionado(tblProductos).toString();
-            Producto producto= new Producto(Integer.parseInt(idSeleccionado));
+            Producto producto = new Producto(Integer.parseInt(idSeleccionado));
             p.eliminar(Integer.parseInt(idSeleccionado));
             JOptionPane.showMessageDialog(frame, "Se eliminó el producto", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             return true;

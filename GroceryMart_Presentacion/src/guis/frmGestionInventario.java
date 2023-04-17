@@ -4,10 +4,9 @@
  */
 package guis;
 
-import Entidades.Producto;
-import Negocio.GestionProducto;
+import Interfaces.IGestionInventario;
 import java.awt.Color;
-import Interfaces.IGestionProducto;
+import Negocio.GestionInventario;
 
 /**
  *
@@ -15,11 +14,13 @@ import Interfaces.IGestionProducto;
  */
 public class frmGestionInventario extends javax.swing.JFrame {
 
+    IGestionInventario control = new GestionInventario();
 
     public frmGestionInventario() {
         initComponents();
+        control.consultarTodos(tablaInventario);
         getContentPane().setBackground(Color.WHITE);
-        tablaProductos.setRowHeight(50);
+        tablaInventario.setRowHeight(50);
     }
 
     /**
@@ -33,9 +34,8 @@ public class frmGestionInventario extends javax.swing.JFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
+        tablaInventario = new javax.swing.JTable();
         btnAgregarProducto = new javax.swing.JButton();
-        btnEliminarProducto = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         txtConsulta = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
@@ -43,13 +43,12 @@ public class frmGestionInventario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tablaProductos.setBackground(new java.awt.Color(255, 255, 255));
-        tablaProductos.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
-        tablaProductos.setForeground(new java.awt.Color(0, 0, 0));
-        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInventario.setBackground(new java.awt.Color(255, 255, 255));
+        tablaInventario.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
+        tablaInventario.setForeground(new java.awt.Color(0, 0, 0));
+        tablaInventario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"0", "fanta", "coca cola", "18.00", "19"},
-                {"1", "takis", "barcel", "14.00", "16"}
+
             },
             new String [] {
                 "ID", "Nombre", "Marca", "Precio", "Disponibilidad"
@@ -58,21 +57,21 @@ public class frmGestionInventario extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        tablaProductos.setMinimumSize(new java.awt.Dimension(30, 60));
-        tablaProductos.setSelectionBackground(new java.awt.Color(0, 0, 255));
-        jScrollPane1.setViewportView(tablaProductos);
-        if (tablaProductos.getColumnModel().getColumnCount() > 0) {
-            tablaProductos.getColumnModel().getColumn(0).setResizable(false);
-            tablaProductos.getColumnModel().getColumn(1).setResizable(false);
-            tablaProductos.getColumnModel().getColumn(2).setResizable(false);
-            tablaProductos.getColumnModel().getColumn(3).setResizable(false);
-            tablaProductos.getColumnModel().getColumn(4).setResizable(false);
-        }
+        tablaInventario.setMinimumSize(new java.awt.Dimension(30, 60));
+        tablaInventario.setSelectionBackground(new java.awt.Color(0, 0, 255));
+        jScrollPane1.setViewportView(tablaInventario);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
@@ -82,15 +81,6 @@ public class frmGestionInventario extends javax.swing.JFrame {
         btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProductoActionPerformed(evt);
-            }
-        });
-
-        btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnEliminarProducto.setForeground(new java.awt.Color(153, 0, 0));
-        btnEliminarProducto.setText("Eliminar del inventario");
-        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProductoActionPerformed(evt);
             }
         });
 
@@ -129,9 +119,7 @@ public class frmGestionInventario extends javax.swing.JFrame {
                             .addComponent(btnVolver)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnAgregarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnEliminarProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))))
+                                .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -156,10 +144,7 @@ public class frmGestionInventario extends javax.swing.JFrame {
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -174,10 +159,6 @@ public class frmGestionInventario extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAgregarProductoActionPerformed
 
-    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
-
-    }//GEN-LAST:event_btnEliminarProductoActionPerformed
-
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
         frmMenu m = new frmMenu();
@@ -186,19 +167,19 @@ public class frmGestionInventario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        String consulta = txtConsulta.getText();
+        control.ConsultaString(consulta, tablaInventario);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaProductos;
+    private javax.swing.JTable tablaInventario;
     private javax.swing.JTextField txtConsulta;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,7 @@ import Entidades.Producto;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 
 public interface IGestionProducto {
@@ -19,4 +20,5 @@ public interface IGestionProducto {
     boolean ActualizarProducto(JFrame frame, Producto producto);
     List<Producto> ConsultaString(JTable tblProductos, String string);
     boolean EliminarProducto(JFrame frame, String idSeleccionado, JTable tblProductos);
+    String getProductoSeleccionadoNombre(JTable tblProductos,JTextField txt);
 }

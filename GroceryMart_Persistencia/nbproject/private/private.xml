@@ -3,14 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/Interfaces/IInventarioDAO.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/Interfaces/IProductosDAO.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/daos/ComprasDAO.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/Interfaces/ConexionBD.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/pruebas/Pruebas.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/daos/InventarioDAO.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/Interfaces/IComprasDAO.java</file>
-            <file>file:/C:/Users/rjsaa/Documents/NetBeansProjects/GroceryMart/GroceryMart_Persistencia/src/daos/ProductoDAO.java</file>
+            <file>file:/C:/Users/spide/OneDrive/Escritorio/GroceryMart/GroceryMart_Persistencia/src/daos/InventarioDAO.java</file>
         </group>
     </open-files>
 </project-private>
