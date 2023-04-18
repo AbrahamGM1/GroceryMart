@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -29,9 +29,9 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnVolver" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAgregarProducto" alignment="0" min="-2" pref="256" max="-2" attributes="0"/>
-                          <Component id="btnConsultarProducto" alignment="0" min="-2" pref="256" max="-2" attributes="0"/>
-                          <Component id="btnEliminarProducto" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
+                          <Component id="btnAgregarAdeudo" alignment="0" min="-2" pref="256" max="-2" attributes="0"/>
+                          <Component id="btnVerAdeudo" alignment="0" min="-2" pref="256" max="-2" attributes="0"/>
+                          <Component id="btnEliminarAdeudo" alignment="1" min="-2" pref="256" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -70,11 +70,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="151" max="-2" attributes="0"/>
-                      <Component id="btnAgregarProducto" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btnAgregarAdeudo" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnConsultarProducto" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btnVerAdeudo" min="-2" pref="51" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEliminarProducto" min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="btnEliminarAdeudo" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -123,7 +123,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tablaProductos">
+            <Component class="javax.swing.JTable" name="tablaAdeudos">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -175,7 +175,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnAgregarProducto">
+    <Component class="javax.swing.JButton" name="btnAgregarAdeudo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -186,10 +186,10 @@
         <Property name="text" type="java.lang.String" value="Agregar Adeudo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarProductoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgregarAdeudoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnConsultarProducto">
+    <Component class="javax.swing.JButton" name="btnVerAdeudo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -200,10 +200,10 @@
         <Property name="text" type="java.lang.String" value="Ver Adeudo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarProductoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerAdeudoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEliminarProducto">
+    <Component class="javax.swing.JButton" name="btnEliminarAdeudo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="24" style="0"/>
@@ -214,7 +214,7 @@
         <Property name="text" type="java.lang.String" value="Eliminar Adeudo"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarProductoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarAdeudoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVolver">

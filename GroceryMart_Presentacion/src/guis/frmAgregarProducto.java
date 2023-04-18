@@ -19,14 +19,13 @@ public class frmAgregarProducto extends javax.swing.JFrame {
     /**
      * Creates new form frmAgregarProducto
      */
-    IGestionProducto control = new GestionProducto(); 
+    IGestionProducto control = new GestionProducto();
 
     public frmAgregarProducto() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -208,7 +207,7 @@ public class frmAgregarProducto extends javax.swing.JFrame {
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         frmGestionProductos g = new frmGestionProductos();
         g.setVisible(true);
-        this.setVisible(false);       
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -221,7 +220,7 @@ public class frmAgregarProducto extends javax.swing.JFrame {
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txtPrecioActionPerformed
 
     private void txtMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMarcaActionPerformed
@@ -230,29 +229,29 @@ public class frmAgregarProducto extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        
+
 //        if (txtNombre.getText().equals("")||txtDescripcion.getText().equals("")||txtPrecio.getText().equals("")||txtMarca.getText().equals("")) {
 //            System.out.println("Llena todos los campos");
 //        }else{
-            Producto producto = new Producto();
-            producto.setNombre(txtNombre.getText());
-            producto.setDescripcion(txtDescripcion.getText());
-            producto.setMarca(txtMarca.getText());
-            try{
+        Producto producto = new Producto();
+        producto.setNombre(txtNombre.getText());
+        producto.setDescripcion(txtDescripcion.getText());
+        producto.setMarca(txtMarca.getText());
+        try {
             producto.setPrecio(Float.parseFloat(txtPrecio.getText()));
-            }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             producto.setPrecio(0);
-            }
-            producto.setStatus("activo");
-            
-            boolean seInsertoProducto = control.AgregarProducto(this, producto);
-            if (seInsertoProducto) {
-                        frmGestionProductos g = new frmGestionProductos();
-                        g.setVisible(true);
-                        this.setVisible(false); 
-            }
+        }
+        producto.setStatus("activo");
+
+        boolean seInsertoProducto = control.AgregarProducto(this, producto);
+        if (seInsertoProducto) {
+            frmGestionProductos g = new frmGestionProductos();
+            g.setVisible(true);
+            this.setVisible(false);
+        }
 //        }
-       
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
@@ -263,9 +262,8 @@ public class frmAgregarProducto extends javax.swing.JFrame {
         char c = evt.getKeyChar();
         if (Character.isDigit(c) || c == '.' && txtPrecio.getText().indexOf('.') == -1) {
             super.processKeyEvent(evt);
-        }else{
-        evt.consume();
-        
+        } else {
+            evt.consume();
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 

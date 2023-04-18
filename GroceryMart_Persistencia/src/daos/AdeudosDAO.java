@@ -45,14 +45,14 @@ public class AdeudosDAO implements IAdeudosDAO{
     }
 
     @Override
-    public Adeudo consultar(Adeudo adeudo) {
+    public Adeudo consultar(Integer idAdeudo) {
         
         try {
             Connection conexion = this.conexion.crearConexion();
 
             Statement comandoSQL = conexion.createStatement();
             String codigoSQL = String.format("SELECT * FROM grocery_mart.registrodeudas"
-                    + " WHERE id_cuentasdinero = " + adeudo.getId() + ";");
+                    + " WHERE id_cuentasdinero = " + idAdeudo + ";");
 
             ResultSet resultados = comandoSQL.executeQuery(codigoSQL);
 
@@ -136,11 +136,17 @@ public class AdeudosDAO implements IAdeudosDAO{
     @Override
     public boolean eliminar(int id) {
        try {
+           System.out.println(id);
             Connection conexion = this.conexion.crearConexion();
             Statement comandoSQL = conexion.createStatement();
+            
+            String codigoSQLDinero = String.format("DELETE FROM grocery_mart.dinero"
+                    + " WHERE id_registrodeudas = " + id + "");
+            
             String codigoSQL = String.format("DELETE FROM grocery_mart.registrodeudas"
                     + " WHERE id_CuentasDinero = " + id + "");
-
+            
+            int registrosAfectadoDinero = comandoSQL.executeUpdate(codigoSQLDinero);
             int registrosAfectados = comandoSQL.executeUpdate(codigoSQL);
             conexion.close();
             return true;

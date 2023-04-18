@@ -51,7 +51,7 @@ public class PruebasAdeudos {
           Adeudo adeudoIndividual = new Adeudo();
           adeudoIndividual.setId(3);
           
-          System.out.println(ado.consultar(adeudoIndividual).toString());
+          //System.out.println(ado.consultar(adeudoIndividual).toString());
           
           //prueba eliminar adeudo de la bd
           ado.eliminar(2);

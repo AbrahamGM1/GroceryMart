@@ -4,7 +4,11 @@
  */
 package guis;
 
+import Entidades.Adeudo;
+import Interfaces.IGestionAdeudos;
+import Negocio.GestionAdeudos;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,9 +19,13 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
     /**
      * Creates new form frmAdeudos
      */
+    IGestionAdeudos control = new GestionAdeudos();
+    
     public frmGestionAdeudos() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
+        control.consultarTodos(tablaAdeudos);
+        tablaAdeudos.setRowHeight(50);
     }
 
 
@@ -30,10 +38,10 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
-        btnAgregarProducto = new javax.swing.JButton();
-        btnConsultarProducto = new javax.swing.JButton();
-        btnEliminarProducto = new javax.swing.JButton();
+        tablaAdeudos = new javax.swing.JTable();
+        btnAgregarAdeudo = new javax.swing.JButton();
+        btnVerAdeudo = new javax.swing.JButton();
+        btnEliminarAdeudo = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,10 +60,10 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 28)); // NOI18N
         jLabel1.setText("ADEUDOS");
 
-        tablaProductos.setBackground(new java.awt.Color(255, 255, 255));
-        tablaProductos.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
-        tablaProductos.setForeground(new java.awt.Color(0, 0, 0));
-        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAdeudos.setBackground(new java.awt.Color(255, 255, 255));
+        tablaAdeudos.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
+        tablaAdeudos.setForeground(new java.awt.Color(0, 0, 0));
+        tablaAdeudos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -78,36 +86,36 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tablaProductos.setMinimumSize(new java.awt.Dimension(30, 60));
-        tablaProductos.setSelectionBackground(new java.awt.Color(0, 0, 255));
-        jScrollPane1.setViewportView(tablaProductos);
+        tablaAdeudos.setMinimumSize(new java.awt.Dimension(30, 60));
+        tablaAdeudos.setSelectionBackground(new java.awt.Color(0, 0, 255));
+        jScrollPane1.setViewportView(tablaAdeudos);
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        btnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAgregarProducto.setForeground(new java.awt.Color(0, 0, 255));
-        btnAgregarProducto.setText("Agregar Adeudo");
-        btnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarAdeudo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAgregarAdeudo.setForeground(new java.awt.Color(0, 0, 255));
+        btnAgregarAdeudo.setText("Agregar Adeudo");
+        btnAgregarAdeudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarProductoActionPerformed(evt);
+                btnAgregarAdeudoActionPerformed(evt);
             }
         });
 
-        btnConsultarProducto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnConsultarProducto.setForeground(new java.awt.Color(0, 0, 255));
-        btnConsultarProducto.setText("Ver Adeudo");
-        btnConsultarProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnVerAdeudo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnVerAdeudo.setForeground(new java.awt.Color(0, 0, 255));
+        btnVerAdeudo.setText("Ver Adeudo");
+        btnVerAdeudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarProductoActionPerformed(evt);
+                btnVerAdeudoActionPerformed(evt);
             }
         });
 
-        btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnEliminarProducto.setForeground(new java.awt.Color(153, 0, 0));
-        btnEliminarProducto.setText("Eliminar Adeudo");
-        btnEliminarProducto.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarAdeudo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnEliminarAdeudo.setForeground(new java.awt.Color(153, 0, 0));
+        btnEliminarAdeudo.setText("Eliminar Adeudo");
+        btnEliminarAdeudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarProductoActionPerformed(evt);
+                btnEliminarAdeudoActionPerformed(evt);
             }
         });
 
@@ -130,9 +138,9 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVolver)
-                            .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnConsultarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnEliminarProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnAgregarAdeudo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVerAdeudo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminarAdeudo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,11 +169,11 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(btnAgregarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAgregarAdeudo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnConsultarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVerAdeudo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEliminarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEliminarAdeudo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -173,21 +181,41 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        control.ConsultaString(txtConsulta.getText(), tablaAdeudos);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProductoActionPerformed
+    private void btnAgregarAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAdeudoActionPerformed
 
-    }//GEN-LAST:event_btnAgregarProductoActionPerformed
+        frmAgregarAdeudo aa = new frmAgregarAdeudo();
+        aa.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_btnAgregarAdeudoActionPerformed
 
-    private void btnConsultarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarProductoActionPerformed
+    private void btnVerAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerAdeudoActionPerformed
+        Integer idAdeudo = control.getAdeudoSeleccionado(tablaAdeudos);
+        if (idAdeudo == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un adeudo para consultarlo", "Aviso", 2);
+        }else{
+        Adeudo adeudo = control.consultar(control.getAdeudoSeleccionado(tablaAdeudos));
+        frmCuentaAdeudo ca = new frmCuentaAdeudo(adeudo);
+        ca.setVisible(true);
+        this.dispose();
+        }
+    }//GEN-LAST:event_btnVerAdeudoActionPerformed
 
-    }//GEN-LAST:event_btnConsultarProductoActionPerformed
-
-    private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_btnEliminarProductoActionPerformed
+    private void btnEliminarAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAdeudoActionPerformed
+        try{
+        Integer idAdeudoSeleccionado = control.getAdeudoSeleccionado(tablaAdeudos);
+        boolean seEliminoAdeudo = control.eliminar(idAdeudoSeleccionado,this,tablaAdeudos);
+        if (seEliminoAdeudo) {
+            control.consultarTodos(tablaAdeudos);
+        }}catch(NullPointerException e){
+                boolean seEliminoAdeudo = control.eliminar(-1,this,tablaAdeudos);
+        }
+        
+        
+    }//GEN-LAST:event_btnEliminarAdeudoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
@@ -198,15 +226,15 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarProducto;
+    private javax.swing.JButton btnAgregarAdeudo;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnConsultarProducto;
-    private javax.swing.JButton btnEliminarProducto;
+    private javax.swing.JButton btnEliminarAdeudo;
+    private javax.swing.JButton btnVerAdeudo;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tablaProductos;
+    private javax.swing.JTable tablaAdeudos;
     private javax.swing.JTextField txtConsulta;
     // End of variables declaration//GEN-END:variables
 }

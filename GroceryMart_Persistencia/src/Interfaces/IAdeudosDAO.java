@@ -12,9 +12,10 @@ import java.util.List;
  * @author rjsaa
  */
 public interface IAdeudosDAO {
+    
     public boolean insertar(Adeudo adeudo);
     
-    public Adeudo consultar(Adeudo adeudo);
+    public Adeudo consultar(Integer idAdeudo);
     
     public List<Adeudo> consultarTodos();
     
