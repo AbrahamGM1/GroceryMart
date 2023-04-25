@@ -230,15 +230,9 @@ public class frmGestionProductos extends javax.swing.JFrame {
 
     private void btnEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarProductoActionPerformed
         // TODO add your handling code here:
-        try {
-            Integer idSeleccionado = control.getProductoSeleccionado(tablaProductos);
-            boolean seEliminoProducto = control.EliminarProducto(this, String.valueOf(idSeleccionado), tablaProductos);
-            if (seEliminoProducto) {
-                control.ConsultaTodos(tablaProductos);
-            }
-        } catch (NullPointerException e) {
-            boolean seEliminoProducto = control.EliminarProducto(this, null, tablaProductos);
-        }
+        frmConfirmacion fc = new frmConfirmacion(tablaProductos,null,true,false);
+        fc.setVisible(true);
+        
     }//GEN-LAST:event_btnEliminarProductoActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

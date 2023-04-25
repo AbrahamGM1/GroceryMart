@@ -205,14 +205,10 @@ public class frmGestionAdeudos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerAdeudoActionPerformed
 
     private void btnEliminarAdeudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAdeudoActionPerformed
-        try{
-        Integer idAdeudoSeleccionado = control.getAdeudoSeleccionado(tablaAdeudos);
-        boolean seEliminoAdeudo = control.eliminar(idAdeudoSeleccionado,this,tablaAdeudos);
-        if (seEliminoAdeudo) {
-            control.consultarTodos(tablaAdeudos);
-        }}catch(NullPointerException e){
-                boolean seEliminoAdeudo = control.eliminar(-1,this,tablaAdeudos);
-        }
+        
+        frmConfirmacion fc = new frmConfirmacion(null,tablaAdeudos,false,true);
+        fc.setVisible(true);
+
         
         
     }//GEN-LAST:event_btnEliminarAdeudoActionPerformed

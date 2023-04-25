@@ -23,13 +23,13 @@ public class frmAgregarAdeudo extends javax.swing.JFrame {
      * Creates new form frmAgregarProducto
      */
     IGestionAdeudos control = new GestionAdeudos();
-
+    
     public frmAgregarAdeudo() {
         initComponents();
         getContentPane().setBackground(Color.WHITE);
-
+        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,12 +187,15 @@ public class frmAgregarAdeudo extends javax.swing.JFrame {
                 this.setVisible(false);
             }
         }
-
+        
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-        // TODO add your handling code here:
+        
+        txtAsunto.setText("");
+        txtNombre.setText("");
+
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
