@@ -283,7 +283,10 @@ public class frmEditarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-        // TODO add your handling code here:
+        txtNombre.setText(producto.getNombre());
+        txtDescripcion.setText(producto.getDescripcion());
+        txtMarca.setText(producto.getMarca());
+        txtPrecio.setText(String.valueOf(producto.getPrecio()));
     }//GEN-LAST:event_btnRestablecerActionPerformed
 
     private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped

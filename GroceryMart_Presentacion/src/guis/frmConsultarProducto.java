@@ -60,16 +60,16 @@ public class frmConsultarProducto extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Microsoft JhengHei", 0, 36)); // NOI18N
         jLabel5.setText("Marca:");
 
-        lblNombre.setFont(new java.awt.Font("Microsoft JhengHei", 0, 36)); // NOI18N
+        lblNombre.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         lblNombre.setText("...");
 
-        lblDescripcion.setFont(new java.awt.Font("Microsoft JhengHei", 0, 36)); // NOI18N
+        lblDescripcion.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         lblDescripcion.setText("...");
 
-        lblPrecio.setFont(new java.awt.Font("Microsoft JhengHei", 0, 36)); // NOI18N
+        lblPrecio.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         lblPrecio.setText("...");
 
-        lblMarca.setFont(new java.awt.Font("Microsoft JhengHei", 0, 36)); // NOI18N
+        lblMarca.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
         lblMarca.setText("...");
 
         jPanel1.setBackground(new java.awt.Color(0, 162, 232));
@@ -146,9 +146,9 @@ public class frmConsultarProducto extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblDescripcion))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDescripcion, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)

@@ -169,9 +169,15 @@ public class GestionProducto implements IGestionProducto {
             // Devolver cada parámetro dentro de su respectivo JTextField 
             idSeleccionado = this.getProductoSeleccionado(tblProductos).toString();
             Producto producto = new Producto(Integer.parseInt(idSeleccionado));
-            p.eliminar(Integer.parseInt(idSeleccionado));
+            boolean seElimino = p.eliminar(Integer.parseInt(idSeleccionado));
+            if (seElimino) {
             JOptionPane.showMessageDialog(frame, "Se eliminó el producto", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             return true;
+            }else{
+            JOptionPane.showMessageDialog(frame, "El producto se encuentra inventariado, no se puede eliminar", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return false;
+            }
+
         }
     }
 
