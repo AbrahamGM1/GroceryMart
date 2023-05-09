@@ -32,6 +32,7 @@ public class frmCuentaAdeudo extends javax.swing.JFrame {
         control.cargarCuenta(adeudo, txtNombre, txtId, txtAsunto);
         controlCostos.consultarCostosAdeudo(adeudo, tablaCostos);
         controlCostos.calcularTotal(adeudo, lblTotal);
+        tablaCostos.setRowHeight(25);
         getContentPane().setBackground(Color.WHITE);
 
     }
@@ -61,6 +62,7 @@ public class frmCuentaAdeudo extends javax.swing.JFrame {
         btnSumar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
@@ -97,6 +99,8 @@ public class frmCuentaAdeudo extends javax.swing.JFrame {
                 txtAsuntoActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
 
         tablaCostos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
